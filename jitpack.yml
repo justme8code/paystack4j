@@ -4,4 +4,7 @@ jdk:
 before_install:
   - sdk install java 21.0.9-tem
   - sdk use java 21.0.9-tem
+  - sdk install gradle 8.14
+  - sdk use gradle 8.14
   - java -version
+  - gradle -v

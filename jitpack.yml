@@ -2,6 +2,6 @@ jdk:
   - openjdk21
 
 before_install:
-  - sdk install java 21.0.5-tem
-  - sdk use java 21.0.5-tem
+  - sdk install java 21.0.9-tem
+  - sdk use java 21.0.9-tem
   - java -version

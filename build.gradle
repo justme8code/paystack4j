@@ -1,0 +1,76 @@
+plugins {
+    id 'java'
+    id 'java-library'
+    id 'maven-publish'
+}
+
+group = 'com.github.justme8code'
+version = '1.0.0'
+archivesBaseName = 'paystack4j'
+
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+    implementation 'com.squareup.okhttp3:okhttp:4.12.0'
+
+    // JSON Processing
+    implementation 'com.google.code.gson:gson:2.10.1'
+
+    // Testing
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation 'com.squareup.okhttp3:mockwebserver:4.12.0'
+
+    implementation("org.slf4j:slf4j-api:2.0.17")
+
+    runtimeOnly 'ch.qos.logback:logback-classic:1.5.13'
+
+    implementation("io.github.cdimascio:dotenv-java:3.2.0")
+}
+
+test {
+    useJUnitPlatform()
+}
+
+java {
+    withSourcesJar()
+    withJavadocJar()
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
+
+publishing {
+    publications {
+        create('mavenJava', MavenPublication) {
+            from components.java
+
+            pom {
+                name.set('Paystack Java Library')
+                description.set('A Java library for Paystack payment integration')
+                url.set('https://github.com/yourusername/paystack-java')
+
+                licenses {
+                    license {
+                        name.set('MIT License')
+                        url.set('https://opensource.org/licenses/MIT')
+                        distribution.set("repo")
+                    }
+                }
+
+                scm {
+                    connection = 'scm:git:git://github.com/justme8code/paystack4j.git'
+                    developerConnection = 'scm:git:ssh://github.com/justme8code/paystack4j.git'
+                    url = 'https://github.com/justme8code/paystack4j'
+                }
+            }
+        }
+    }
+}

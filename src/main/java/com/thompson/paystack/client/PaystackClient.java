@@ -2,6 +2,7 @@ package com.thompson.paystack.client;
 
 import com.thompson.paystack.services.SubaccountService;
 import com.thompson.paystack.services.TransactionService;
+import com.thompson.paystack.webhook.WebhookHandler;
 import okhttp3.OkHttpClient;
 
 import java.util.concurrent.TimeUnit;
@@ -22,6 +23,10 @@ import java.util.concurrent.TimeUnit;
  *
  * // Verify a transaction
  * PaystackResponse&lt;TransactionData&gt; verification = client.transactions().verify("ref_123");
+ *
+ * // Handle webhooks
+ * WebhookHandler webhookHandler = client.webhooks();
+ * boolean isValid = webhookHandler.verifySignature(payload, signature);
  * </pre>
  */
 public class PaystackClient {
@@ -29,6 +34,7 @@ public class PaystackClient {
     private final OkHttpClient httpClient;
     private final TransactionService transactionService;
     private final SubaccountService subaccountService;
+    private final WebhookHandler webhookHandler;
 
     /**
      * Create a new Paystack client with default settings
@@ -59,6 +65,7 @@ public class PaystackClient {
         this.httpClient = httpClient;
         this.transactionService = new TransactionService(httpClient, config);
         this.subaccountService = new SubaccountService(httpClient, config);
+        this.webhookHandler = new WebhookHandler(config.getSecretKey());
     }
 
     /**
@@ -77,6 +84,15 @@ public class PaystackClient {
      */
     public SubaccountService subaccounts() {
         return subaccountService;
+    }
+
+    /**
+     * Get the webhook handler for processing webhooks
+     *
+     * @return WebhookHandler instance
+     */
+    public WebhookHandler webhooks() {
+        return webhookHandler;
     }
 
     /**

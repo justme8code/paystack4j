@@ -11,6 +11,7 @@ A modern, easy-to-use Java library for integrating Paystack payment gateway with
 ✅ **Payment Verification** - Verify completed transactions  
 ✅ **Subaccount Management** - Create and manage seller subaccounts  
 ✅ **Split Payments** - Automatically split payments between platform and sellers  
+✅ **Webhook Support** - Secure webhook handling with signature verification  
 ✅ **Type-Safe** - Full type safety with enums and models  
 ✅ **Java 8+ Compatible** - Works with Java 8 and above  
 ✅ **Builder Pattern** - Easy-to-use fluent API

@@ -22,7 +22,7 @@ class SimplePaymentExample {
                 .email("bjmay302004@gmail.com")
                 .amount(10000.00)  // ₦10,000
                 .currency(Currency.NGN)
-                .reference("TEST_1234567890")
+                .reference("PAY_" + System.currentTimeMillis())
                 .build();
 
         PaystackResponse<TransactionInitData> response = client.transactions().initialize(request);

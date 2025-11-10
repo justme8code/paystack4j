@@ -1,9 +1,12 @@
 package com.thompson.paystack.webhook;
 
+import com.thompson.paystack.exceptions.InvalidSignatureException;
+
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
 import java.security.InvalidKeyException;
+import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 /**
@@ -35,7 +38,7 @@ public class WebhookSignatureVerifier {
      */
     public boolean verifySignature(String payload, String signature) {
         if (payload == null || signature == null) {
-            return false;
+            throw new InvalidSignatureException("Payload or signature cannot be null");
         }
 
         try {
@@ -44,7 +47,7 @@ public class WebhookSignatureVerifier {
 
         } catch (Exception e) {
             // If signature computation fails, reject the webhook
-            return false;
+            throw new InvalidSignatureException(e.getMessage());
         }
     }
 
@@ -93,17 +96,14 @@ public class WebhookSignatureVerifier {
      * @param a First string
      * @param b Second string
      * @return true if strings are equal
+    /**
+     * Constant-time comparison using JDK built-in method.
      */
     private boolean secureCompare(String a, String b) {
-        if (a.length() != b.length()) {
-            return false;
-        }
-
-        int result = 0;
-        for (int i = 0; i < a.length(); i++) {
-            result |= a.charAt(i) ^ b.charAt(i);
-        }
-
-        return result == 0;
+        if (a == null || b == null) return false;
+        return MessageDigest.isEqual(
+                a.getBytes(StandardCharsets.US_ASCII),
+                b.getBytes(StandardCharsets.US_ASCII)
+        );
     }
 }

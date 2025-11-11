@@ -2,6 +2,7 @@ package com.thompson.paystack.utils;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.thompson.paystack.adapters.FlexibleBooleanAdapter;
 import com.thompson.paystack.adapters.TransactionMetadataDeserializer;
 import com.thompson.paystack.models.response.TransactionMetadata;
 
@@ -11,6 +12,7 @@ import com.thompson.paystack.models.response.TransactionMetadata;
 public class JsonUtils {
     private static final Gson GSON = new GsonBuilder()
             .registerTypeAdapter(TransactionMetadata.class, new TransactionMetadataDeserializer())
+            .registerTypeAdapter(Boolean.class, new FlexibleBooleanAdapter())
             .create();
 
     // Private constructor to prevent instantiation

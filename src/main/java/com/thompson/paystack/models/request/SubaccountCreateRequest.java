@@ -32,6 +32,9 @@ public class SubaccountCreateRequest {
     @SerializedName("active")
     private Boolean active;
 
+    @SerializedName("is_verified")
+    private Boolean verified;
+
     // Private constructor - use Builder
     private SubaccountCreateRequest() {
     }
@@ -153,6 +156,14 @@ public class SubaccountCreateRequest {
         }
 
         /**
+         * Set isVerified
+         */
+        public Builder verified(boolean isVerified) {
+            request.active = isVerified;
+            return this;
+        }
+
+        /**
          * Build the request
          */
         public SubaccountCreateRequest build() {
@@ -191,6 +202,7 @@ public class SubaccountCreateRequest {
                 ", primaryContactName='" + primaryContactName + '\'' +
                 ", primaryContactPhone='" + primaryContactPhone + '\'' +
                 ", active=" + active +
+                ", verified=" + verified +
                 '}';
     }
 }

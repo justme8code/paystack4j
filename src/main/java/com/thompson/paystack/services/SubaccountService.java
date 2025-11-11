@@ -51,8 +51,8 @@ public class SubaccountService {
                 .post(RequestBody.create(jsonBody, JSON))
                 .build();
 
-        try {
-            Response response = httpClient.newCall(httpRequest).execute();
+        try (Response response = httpClient.newCall(httpRequest).execute();) {
+
             String responseBody = response.body().string();
 
             if (!response.isSuccessful()) {
@@ -90,8 +90,7 @@ public class SubaccountService {
                 .get()
                 .build();
 
-        try {
-            Response response = httpClient.newCall(httpRequest).execute();
+        try (Response response = httpClient.newCall(httpRequest).execute();) {
             String responseBody = response.body().string();
 
             if (!response.isSuccessful()) {
@@ -110,10 +109,10 @@ public class SubaccountService {
     }
 
     @NotNull
-    private <T> PaystackResponse<T> getSubaccountDataPaystackResponse(Response response, String responseBody) {
-        Type type = new TypeToken<PaystackResponse<T>>() {
+    private PaystackResponse<SubaccountData> getSubaccountDataPaystackResponse(Response response, String responseBody) {
+        Type type = new TypeToken<PaystackResponse<SubaccountData>>() {
         }.getType();
-        PaystackResponse<T> paystackResponse = JsonUtils.getGson().fromJson(responseBody, type);
+        PaystackResponse<SubaccountData> paystackResponse = JsonUtils.getGson().fromJson(responseBody, type);
 
         if (!paystackResponse.isStatus()) {
             throw new PaystackApiException(
@@ -125,6 +124,16 @@ public class SubaccountService {
 
         return paystackResponse;
     }
+
+    private PaystackResponse<List<SubaccountData>> getSubaccountListPaystackResponse(Response response, String responseBody) {
+        Type type = new TypeToken<PaystackResponse<List<SubaccountData>>>() {}.getType();
+        PaystackResponse<List<SubaccountData>> paystackResponse = JsonUtils.getGson().fromJson(responseBody, type);
+        if (!paystackResponse.isStatus()) {
+            throw new PaystackApiException("API returned error: " + paystackResponse.getMessage(), response.code(), responseBody);
+        }
+        return paystackResponse;
+    }
+
 
     /**
      * Fetch all subaccount
@@ -142,8 +151,7 @@ public class SubaccountService {
                 .build();
 
 
-        try {
-            Response response = httpClient.newCall(httpRequest).execute();
+        try (Response response = httpClient.newCall(httpRequest).execute();) {
             String responseBody = response.body().string();
 
             if (!response.isSuccessful()) {
@@ -154,7 +162,7 @@ public class SubaccountService {
                 );
             }
 
-            PaystackResponse<List<SubaccountData>> paystackResponse = getSubaccountDataPaystackResponse(response, responseBody);
+            PaystackResponse<List<SubaccountData>> paystackResponse = getSubaccountListPaystackResponse(response, responseBody);
 
             if (!paystackResponse.isStatus()) {
                 throw new PaystackApiException(
@@ -175,7 +183,7 @@ public class SubaccountService {
      * Updates details of a subaccount
      *
      * @param subaccountCodeOrId The subaccount code or Id (e.g., ACCT_xxxxxxxxx)
-     * @param request The subaccount updated pay load
+     * @param request            The subaccount updated pay load
      * @return Response containing subaccount details
      * @throws PaystackException if request fails
      */
@@ -191,8 +199,7 @@ public class SubaccountService {
                 .put(RequestBody.create(jsonBody, JSON))
                 .build();
 
-        try {
-            Response response = httpClient.newCall(httpRequest).execute();
+        try (Response response = httpClient.newCall(httpRequest).execute();) {
             String responseBody = response.body().string();
 
             if (!response.isSuccessful()) {

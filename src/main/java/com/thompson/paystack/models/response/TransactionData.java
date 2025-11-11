@@ -7,11 +7,11 @@ import com.thompson.paystack.enums.TransactionStatus;
  * Complete transaction data returned by verify endpoint
  */
 public class TransactionData {
-    private long id;
+    private Long id;
     private String domain;
     private String status;
     private String reference;
-    private long amount;
+    private Long amount;
     private String message;
 
     @SerializedName("gateway_response")

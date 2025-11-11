@@ -33,15 +33,16 @@ public class SubaccountData {
     private String accountNumber;
 
     @SerializedName("percentage_charge")
-    private double percentageCharge;
+    private Double percentageCharge;
 
     @SerializedName("is_verified")
-    private boolean isVerified;
+    private Boolean isVerified;
 
     @SerializedName("settlement_schedule")
     private String settlementSchedule;
 
-    private boolean active;
+    @SerializedName("active")
+    private Boolean active;
 
     @SerializedName("created_at")
     private String createdAt;
@@ -184,6 +185,9 @@ public class SubaccountData {
                 ", businessName='" + businessName + '\'' +
                 ", accountNumber='" + accountNumber + '\'' +
                 ", percentageCharge=" + percentageCharge +
+                ", active=" + active +
+                ", isVerified=" + isVerified +
+                ", settlementSchedule='" + settlementSchedule + '\'' +
                 '}';
     }
 }

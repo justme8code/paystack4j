@@ -1,5 +1,7 @@
 # paystack4j
 
+[![JAVA](https://raw.githubusercontent.com/github/explore/refs/heads/main/topics/java/java.png)](https://www.java.com) [![PAYSTACK](https://avatars.githubusercontent.com/u/14998667?s=200&v=4)](http://paystack.com/)
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Java](https://img.shields.io/badge/Java-21%2B-blue.svg)](https://www.java.com)
 
@@ -339,6 +341,7 @@ See the `PaymentExample.java` file for complete working examples including:
 - Initializing split payments
 - Verifying transactions
 - Handling callbacks
+See the example page https://github.com/justme8code/paystack4jexamples
 
 ## Support
 

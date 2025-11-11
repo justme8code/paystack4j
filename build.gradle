@@ -5,7 +5,7 @@ plugins {
 }
 
 group = 'com.github.justme8code'
-version = '1.1.1-SNAPSHOT'
+version = '1.1.1'
 archivesBaseName = 'paystack4j'
 
 
@@ -30,8 +30,6 @@ dependencies {
     implementation("org.slf4j:slf4j-api:2.0.17")
 
     runtimeOnly 'ch.qos.logback:logback-classic:1.5.13'
-
-    implementation("io.github.cdimascio:dotenv-java:3.2.0")
 }
 
 test {

@@ -314,8 +314,9 @@ PaystackClient client = new PaystackClient(key);
 - **Paystack API Docs:** https://paystack.com/docs/api/
 - **Test Cards:** https://paystack.com/docs/payments/test-payments/
 - **Bank Codes:** https://paystack.com/docs/api/#miscellaneous-bank
-- **paystack4j GitHub:** github.com/YOUR_USERNAME/paystack4j
-- **JitPack:** jitpack.io/#YOUR_USERNAME/paystack4j
+- **paystack4j GitHub:** https://github.com/justme8code/paystack4j
+- **JitPack:** https://jitpack.io/#justme8code/paystack4j
+- **Paystack4j Examples:** https://github.com/justme8code/paystack4jexamples
 
 ---
 

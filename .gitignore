@@ -14,7 +14,6 @@ build/
 *.iml
 *.ipr
 *.env*
-!env.example
 out/
 !**/src/main/**/out/
 !**/src/test/**/out/

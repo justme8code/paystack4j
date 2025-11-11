@@ -5,7 +5,7 @@ All notable changes to paystack4j will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [1.1.0] - 2025-11-10
 
 ### Added
 - Webhook support with signature verification
@@ -18,12 +18,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - WebhookSignatureVerifier for security
 - Multiple webhook handling examples
 
-## [1.0.2] - 2025-01-09
+## [1.0.2] - 2025-11-09
 
 ### Added
 - Fixed JitPack publish issue
 
-## [1.0.0] - 2025-01-09
+## [1.0.0] - 2025-11-09
 
 ### Added
 - Initial release of paystack4j

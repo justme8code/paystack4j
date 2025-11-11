@@ -53,7 +53,7 @@ public class WebhookHandler {
      * @return Parsed WebhookPayload if signature is valid, null otherwise
      */
     public WebhookPayload verifyAndParse(String payload, String signature) {
-        if (verifySignature(payload, signature)) {
+        if (!verifySignature(payload, signature)) {
             return null;
         }
 

@@ -2,14 +2,16 @@ package com.thompson.paystack.client;
 
 import com.thompson.paystack.services.SubaccountService;
 import com.thompson.paystack.services.TransactionService;
+import com.thompson.paystack.services.TransferService;
 import com.thompson.paystack.webhook.WebhookHandler;
+import lombok.Getter;
 import okhttp3.OkHttpClient;
 
 import java.util.concurrent.TimeUnit;
 
 /**
  * Main Paystack API client
- *
+ * <p>
  * Usage:
  * <pre>
  * PaystackClient client = new PaystackClient("sk_test_xxxxx");
@@ -30,10 +32,17 @@ import java.util.concurrent.TimeUnit;
  * </pre>
  */
 public class PaystackClient {
+    /**
+     * -- GETTER --
+     *  Get the configuration
+     *
+     */
+    @Getter
     private final PaystackConfig config;
     private final OkHttpClient httpClient;
     private final TransactionService transactionService;
     private final SubaccountService subaccountService;
+    private final TransferService transferService;
     private final WebhookHandler webhookHandler;
 
     /**
@@ -65,6 +74,7 @@ public class PaystackClient {
         this.httpClient = httpClient;
         this.transactionService = new TransactionService(httpClient, config);
         this.subaccountService = new SubaccountService(httpClient, config);
+        this.transferService = new TransferService(httpClient, config);
         this.webhookHandler = new WebhookHandler(config.getSecretKey());
     }
 
@@ -87,6 +97,15 @@ public class PaystackClient {
     }
 
     /**
+     * Get the transfer service for sending money
+     *
+     * @return TransferService instance
+     */
+    public TransferService transfers() {
+        return transferService;
+    }
+
+    /**
      * Get the webhook handler for processing webhooks
      *
      * @return WebhookHandler instance
@@ -106,12 +125,4 @@ public class PaystackClient {
                 .build();
     }
 
-    /**
-     * Get the configuration
-     *
-     * @return PaystackConfig instance
-     */
-    public PaystackConfig getConfig() {
-        return config;
-    }
 }

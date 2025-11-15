@@ -2,21 +2,15 @@ package com.thompson.paystack.models.webhook;
 
 import com.google.gson.JsonObject;
 import com.thompson.paystack.enums.WebhookEvent;
+import lombok.Data;
 
 /**
  * Represents a webhook payload received from Paystack
  */
+@Data
 public class WebhookPayload {
     private String event;
     private JsonObject data;
-
-    public String getEvent() {
-        return event;
-    }
-
-    public void setEvent(String event) {
-        this.event = event;
-    }
 
     /**
      * Get the event as an enum
@@ -25,14 +19,6 @@ public class WebhookPayload {
      */
     public WebhookEvent getEventEnum() {
         return WebhookEvent.fromString(event);
-    }
-
-    public JsonObject getData() {
-        return data;
-    }
-
-    public void setData(JsonObject data) {
-        this.data = data;
     }
 
     /**
@@ -70,13 +56,5 @@ public class WebhookPayload {
      */
     public boolean isSubscriptionEvent() {
         return getEventEnum().isSubscriptionEvent();
-    }
-
-    @Override
-    public String toString() {
-        return "WebhookPayload{" +
-                "event='" + event + '\'' +
-                ", data=" + data +
-                '}';
     }
 }

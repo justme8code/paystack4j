@@ -4,6 +4,7 @@ import com.google.gson.reflect.TypeToken;
 import com.thompson.paystack.client.PaystackConfig;
 import com.thompson.paystack.exceptions.PaystackApiException;
 import com.thompson.paystack.exceptions.PaystackException;
+import com.thompson.paystack.models.request.ChargeAuthorizationRequest;
 import com.thompson.paystack.models.request.TransactionInitRequest;
 import com.thompson.paystack.models.response.PaystackResponse;
 import com.thompson.paystack.models.response.TransactionData;
@@ -126,4 +127,53 @@ public class TransactionService {
         }
 
     }
+
+    /**
+     * Charge a saved authorization (repeat charge without customer input)
+     *
+     * @param request Charge authorization request
+     * @return Response containing transaction data
+     * @throws PaystackException if request fails
+     */
+    public PaystackResponse<TransactionData> chargeAuthorization(ChargeAuthorizationRequest request) {
+        String url = config.getBaseUrl() + "/transaction/charge_authorization";
+        String jsonBody = JsonUtils.toJson(request);
+
+        Request httpRequest = new Request.Builder()
+                .url(url)
+                .addHeader("Authorization", config.getAuthorizationHeader())
+                .addHeader("Content-Type", "application/json")
+                .post(RequestBody.create(jsonBody, JSON))
+                .build();
+
+        try {
+            Response response = httpClient.newCall(httpRequest).execute();
+            String responseBody = response.body().string();
+
+            if (!response.isSuccessful()) {
+                throw new PaystackApiException(
+                        "Failed to charge authorization: " + response.message(),
+                        response.code(),
+                        responseBody
+                );
+            }
+
+            Type type = new TypeToken<PaystackResponse<TransactionData>>(){}.getType();
+            PaystackResponse<TransactionData> paystackResponse = JsonUtils.getGson().fromJson(responseBody, type);
+
+            if (!paystackResponse.isStatus()) {
+                throw new PaystackApiException(
+                        "API returned error: " + paystackResponse.getMessage(),
+                        response.code(),
+                        responseBody
+                );
+            }
+
+            return paystackResponse;
+
+        } catch (IOException e) {
+            throw new PaystackException("Network error while charging authorization", e);
+        }
+    }
+
 }

@@ -1,10 +1,12 @@
 package com.thompson.paystack.models.request;
 
 import com.google.gson.annotations.SerializedName;
+import lombok.Data;
 
 /**
  * Request model for creating a subaccount
  */
+@Data
 public class SubaccountCreateRequest {
     @SerializedName("business_name")
     private String businessName;
@@ -34,46 +36,6 @@ public class SubaccountCreateRequest {
 
     @SerializedName("is_verified")
     private Boolean verified;
-
-    // Private constructor - use Builder
-    private SubaccountCreateRequest() {
-    }
-
-    public String getBusinessName() {
-        return businessName;
-    }
-
-    public String getSettlementBank() {
-        return settlementBank;
-    }
-
-    public String getAccountNumber() {
-        return accountNumber;
-    }
-
-    public Double getPercentageCharge() {
-        return percentageCharge;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public String getPrimaryContactEmail() {
-        return primaryContactEmail;
-    }
-
-    public String getPrimaryContactName() {
-        return primaryContactName;
-    }
-
-    public String getPrimaryContactPhone() {
-        return primaryContactPhone;
-    }
-
-    public boolean isActive() {
-        return active;
-    }
 
     /**
      * Builder for SubaccountCreateRequest
@@ -159,7 +121,7 @@ public class SubaccountCreateRequest {
          * Set isVerified
          */
         public Builder verified(boolean isVerified) {
-            request.active = isVerified;
+            request.verified = isVerified;
             return this;
         }
 
@@ -188,21 +150,5 @@ public class SubaccountCreateRequest {
      */
     public static Builder builder() {
         return new Builder();
-    }
-
-    @Override
-    public String toString() {
-        return "SubaccountCreateRequest{" +
-                "businessName='" + businessName + '\'' +
-                ", settlementBank='" + settlementBank + '\'' +
-                ", accountNumber='" + accountNumber + '\'' +
-                ", percentageCharge=" + percentageCharge +
-                ", description='" + description + '\'' +
-                ", primaryContactEmail='" + primaryContactEmail + '\'' +
-                ", primaryContactName='" + primaryContactName + '\'' +
-                ", primaryContactPhone='" + primaryContactPhone + '\'' +
-                ", active=" + active +
-                ", verified=" + verified +
-                '}';
     }
 }

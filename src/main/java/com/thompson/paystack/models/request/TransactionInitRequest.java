@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName;
 import com.thompson.paystack.enums.Bearer;
 import com.thompson.paystack.enums.Currency;
 import com.thompson.paystack.utils.AmountUtils;
+import lombok.Data;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
@@ -12,6 +13,7 @@ import java.util.Map;
 /**
  * Request model for initializing a transaction
  */
+@Data
 public class TransactionInitRequest {
     private String email;
     private long amount;  // Amount in kobo
@@ -28,46 +30,6 @@ public class TransactionInitRequest {
 
     private String bearer;
     private Map<String, Object> metadata;
-
-    // Private constructor - use Builder
-    private TransactionInitRequest() {
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public long getAmount() {
-        return amount;
-    }
-
-    public String getCurrency() {
-        return currency;
-    }
-
-    public String getReference() {
-        return reference;
-    }
-
-    public String getCallbackUrl() {
-        return callbackUrl;
-    }
-
-    public String getSubaccount() {
-        return subaccount;
-    }
-
-    public Long getTransactionCharge() {
-        return transactionCharge;
-    }
-
-    public String getBearer() {
-        return bearer;
-    }
-
-    public Map<String, Object> getMetadata() {
-        return metadata;
-    }
 
     /**
      * Builder for TransactionInitRequest
@@ -220,18 +182,5 @@ public class TransactionInitRequest {
      */
     public static Builder builder() {
         return new Builder();
-    }
-
-    @Override
-    public String toString() {
-        return "TransactionInitRequest{" +
-                "email='" + email + '\'' +
-                ", amount=" + amount +
-                ", currency='" + currency + '\'' +
-                ", reference='" + reference + '\'' +
-                ", subaccount='" + subaccount + '\'' +
-                ", transactionCharge=" + transactionCharge +
-                ", bearer='" + bearer + '\'' +
-                '}';
     }
 }

@@ -15,8 +15,9 @@ A modern, easy-to-use Java library for integrating Paystack payment gateway with
 ✅ **Split Payments** - Automatically split payments between platform and sellers  
 ✅ **Webhook Support** - Secure webhook handling with signature verification  
 ✅ **Type-Safe** - Full type safety with enums and models  
-✅ **Java 8+ Compatible** - Works with Java 8 and above  
+✅ **Java 21+ Compatible** - Works with Java 21 and above  
 ✅ **Builder Pattern** - Easy-to-use fluent API
+✅ **Transfer API** - Send Money to Bank Accounts
 
 ## Requirements
 
@@ -40,7 +41,7 @@ Add the dependency:
 
 ```gradle
 dependencies {
-    implementation 'com.github.YOUR_USERNAME:paystack4j:1.0.0'
+    implementation 'com.github.justme8code:paystack4j:1.2.0'
 }
 ```
 
@@ -63,9 +64,9 @@ Add the dependency:
 
 ```xml
 <dependency>
-    <groupId>com.github.YOUR_USERNAME</groupId>
+    <groupId>com.github.justme8code</groupId>
     <artifactId>paystack4j</artifactId>
-    <version>1.0.0</version>
+    <version>1.2.0</version>
 </dependency>
 ```
 
@@ -341,7 +342,8 @@ See the `PaymentExample.java` file for complete working examples including:
 - Initializing split payments
 - Verifying transactions
 - Handling callbacks
-See the example page https://github.com/justme8code/paystack4jexamples
+- See the example page https://github.com/justme8code/paystack4jexamples
+- See documentations https://github.com/justme8code/documentation
 
 ## Support
 
